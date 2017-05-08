@@ -1,0 +1,22 @@
+{
+  "name": "flashcardgenerator",
+  "version": "1.0.0",
+  "description": "flashcard command line app",
+  "main": "interface.js",
+  "scripts": {
+    "test": "basicCard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheKingdomDev/Flashcard-Generator.git"
+  },
+  "author": "Eric King",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheKingdomDev/Flashcard-Generator/issues"
+  },
+  "homepage": "https://github.com/TheKingdomDev/Flashcard-Generator#readme",
+  "dependencies": {
+    "inquirer": "^3.0.6"
+  }
+}
