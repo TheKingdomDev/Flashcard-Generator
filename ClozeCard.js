@@ -9,7 +9,7 @@ function ClozeCard(text, cloze) {
 
 //USING STRING METHOD REPLACE TO REMOVE PART OF SENTENCE
 ClozeCard.prototype.partText = function () {
-    return this.text.replace(this.cloze, '..........');
+    return this.fullText.replace(this.cloze, '..........');
 };
 // DISPLAY ONLY THE SOLUTION
 ClozeCard.prototype.clozeText = function () {

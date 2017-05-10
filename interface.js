@@ -3,8 +3,8 @@
 //init
 
 var inquirer = require('inquirer');
-var basicCard = require('./BasicCard.js');
-var clozeCard = require('./ClozeCard.js');
+var BasicCard = require('./BasicCard.js');
+var ClozeCard = require('./ClozeCard.js');
 
 //store new cards in decks
 
@@ -32,10 +32,10 @@ var start = function() {
     }).then(function(answer){
         console.log(answer);
         if(answer.selectType === "basicCard") {
-            basicCard();
+            createbasicCard();
         } else if(answer.selectType === "clozeCard") {
             console.log("thank you for choosing a clozeCard");
-            clozeCard();
+            createClozeCard();
         } else {
             console.log("Let's start the quiz!")
         }
@@ -49,12 +49,12 @@ var start = function() {
     //text for back
     //push the card to the deck
 
-var basicCard = function() {
+var createbasicCard = function() {
     console.log("Let's create a new Basic Card!");
     console.log("=====================");
     
 
-    inquirer.prompt(
+    inquirer.prompt([
     {
         type: "input",
         message: "What is the question on the front?",
@@ -68,13 +68,13 @@ var basicCard = function() {
     }
     
     
-    ).then(function(userInput) {
-        var bCard = new basicCard(userInput.front, userInput.back);
+    ]).then(function(answer) {
+        
+        var bCard = new BasicCard(answer.front, answer.back);
             console.log("Front of the Basic Card: " + bCard.front);
             console.log("Back of the Basic Card: " + bCard.back);
-        
-        basicFlashCardDeck.push(bCard);
-    })
+            basicFlashCardDeck.push(bCard);
+    });
 }
 
 //cloze card function
@@ -84,11 +84,11 @@ var basicCard = function() {
     //cloze word
     //call the partial text function from the constructor to create the cloze card
 
-var clozeCard = function() {
+var createClozeCard = function() {
     console.log("Let's create a new Cloze Card!");
     console.log("=====================");
 
-    inquirer.prompt(
+    inquirer.prompt([
     {
         type: "input",
         message: "What is the full text for the Cloze Card?",
@@ -99,15 +99,14 @@ var clozeCard = function() {
         message: "What is the Cloze Word?",
         name: "clozeWord"
     }
-    ).then(function(userInput) {
-        var cCard = newClozeCard(userInput.full, userInput.clozeWord);
-        if(cCard.partial() == -1) {
+    ]).then(function(userInput) {
+        var cCard = new ClozeCard(userInput.full, userInput.clozeWord);
+        if(cCard.partText() == -1) {
             console.log("Provided cloze was invalid. Please try again.");
         } else {
-            console.log("Full text of Cloze Card: " + cCard.full);
-            console.log("Cloze word of the Cloze Card: " + cCard.clozeWord);
-            console.log("Partial text of card: " + cCard.partial());
-
+            console.log("Full text of Cloze Card: " + cCard.fullText);
+            console.log("Cloze word of the Cloze Card: " + cCard.cloze);
+            console.log("Partial text of card: " + cCard.partText());
             clozeFlashCardDeck.push(cCard);
         }
     });
